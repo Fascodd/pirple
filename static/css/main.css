@@ -1,3 +1,8 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 #user-task-container {
   position: relative;
 }
@@ -8,10 +13,10 @@
   flex-direction: row;
   width: auto;
 }
-#task-list {
+table {
   width: 100%;
 }
-.task-width {
+table tr * {
   border: 1px solid black;
   width: calc(100% / 4);
 }

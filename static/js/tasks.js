@@ -27,23 +27,17 @@ get_user_tasks().then((data) => {
 });
 
 function create_task(obj) {
-  const task_list_container = document.getElementById("user_task_container");
-  const task_container = document.createElement("div");
-  task_container.classList = "task-list-container";
-  const task_div_container = document.createElement("div");
-  const delete_div = createDeleteBtn();
-  let obj_iterator = 0;
+  const task_table = document.getElementById("task-table");
+  const task_row = document.createElement("tr");
+  task_row.classList = "task-row";
   for (item_data in obj) {
-    createListItem(obj[item_data], task_container, obj_iterator, item_data);
-    obj_iterator++;
+    createListItem(obj, task_row);
   }
-
-  task_container.appendChild(task_div_container);
-  task_container.appendChild(delete_div);
-  task_list_container.appendChild(task_container);
+  task_table.appendChild(task_row);
 }
 
 function createDeleteBtn() {
+  /*
   const delete_div = document.createElement("div");
   const delete_button = document.createElement("a");
   delete_button.classList = "delete_btn";
@@ -51,21 +45,12 @@ function createDeleteBtn() {
   delete_button.innerText = "X";
   delete_div.appendChild(delete_button);
 
-  return delete_div;
+  return delete_div; */
 }
 
-function createListItem(e, parentContainer, index, item_data) {
-  const element_div = document.createElement("div");
-  const element_p = document.createElement("p");
-  element_p.textContent = e;
-  element_div.appendChild(element_p);
-  element_div.classList = `task-item task-width ${item_data}`;
-  element_p.classList = "task-text";
-  parentContainer.appendChild(element_div);
-  index === 0
-    ? (element_p.classList += " task-id")
-    : element_p.addEventListener("focusin", (e) => {
-        console.log(e);
-        console.log("i am focused");
-      });
+function createListItem(obj, task_row) {
+  const data = obj[item_data];
+  const table_detail = document.createElement("td");
+  table_detail.textContent = data;
+  task_row.appendChild(table_detail);
 }
