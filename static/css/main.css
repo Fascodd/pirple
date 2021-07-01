@@ -1,0 +1,30 @@
+#user-task-container {
+  position: relative;
+}
+.task-list-container,
+.task-header-container {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: auto;
+}
+#task-list {
+  width: 100%;
+}
+.task-width {
+  border: 1px solid black;
+  width: calc(100% / 4);
+}
+.delete_btn_container {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  background-color: red;
+}

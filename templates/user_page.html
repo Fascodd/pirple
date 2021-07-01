@@ -1,0 +1,35 @@
+{% extends 'structure.html' %}{% block main %}
+<h1>Welcome to your homepage</h1>
+<h3>{{message}}</h3>
+<div>
+  <p>Add a task</p>
+  <form action="/add_task" method="POST">
+    <div class="add-task-header">
+      <label for="">Task Name</label>
+      <input type="text" name="task_name" />
+    </div>
+    <div class="add-task-header">
+      <label for="">Start Date</label>
+      <input type="text" name="task_start_date" />
+    </div>
+    <div class="add-task-header">
+      <label for=""> Due Date</label>
+      <input type="text" name="task_due_date" />
+    </div>
+
+    <button type="submit">Add Task</button>
+  </form>
+</div>
+<div id="task-list">
+  <p>Tasks</p>
+  <div class="task-header-container">
+    <div class="task-header task-width">Task id</div>
+    <div class="task-header task-width">Task Name</div>
+    <div class="task-header task-width">Taske Start Date</div>
+    <div class="task-header task-width">Task Due Date</div>
+  </div>
+  <div onload="get_user_tasks()" id="user_task_container">{{user_tasks}}</div>
+</div>
+<a href="/logout">Logout</a>
+<script src="../static/js/tasks.js"></script>
+{% endblock main %}

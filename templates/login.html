@@ -1,0 +1,10 @@
+{% extends "structure.html" %} {% block main %}
+<h1>This is the "login.html" page</h1>
+<p>{{message}}</p>
+<form action="/login" method="POST">
+  <input name="username" type="text" />
+  <input name="password" type="password" />
+  <button type="submit">Login</button>
+</form>
+
+{% endblock main %}
