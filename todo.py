@@ -105,8 +105,5 @@ def edit_task(task_id):
         return render_template('edit_task.html')
     else: return 'Post %d' % task_id
 
-
-    
-
 if __name__ == '__main__':
     app.run(port=7000, debug=True)
