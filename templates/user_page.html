@@ -20,16 +20,17 @@
     <button type="submit">Add Task</button>
   </form>
 </div>
-<div id="task-list">
-  <p>Tasks</p>
-  <div class="task-header-container">
-    <div class="task-header task-width">Task id</div>
-    <div class="task-header task-width">Task Name</div>
-    <div class="task-header task-width">Taske Start Date</div>
-    <div class="task-header task-width">Task Due Date</div>
-  </div>
-  <div onload="get_user_tasks()" id="user_task_container">{{user_tasks}}</div>
-</div>
+<table id="task-list">
+  <tr class="task-width">
+    <th>Task Id</th>
+    <th>Task Name</th>
+    <th>Task Start Date</th>
+    <th>Task Due Data</th>
+    <th>Edit</th>
+  </tr>
+</table>
+<button type="submit">Update Tasks</button>
+
 <a href="/logout">Logout</a>
 <script src="../static/js/tasks.js"></script>
 {% endblock main %}

@@ -70,7 +70,6 @@ def logout():
 @app.route('/tasks', methods=['GET', 'POST'])
 def tasks():
     if request.method == 'GET':
-        print('ping')
         user_tasks = models.get_tasks(session['username'])
         return jsonify(user_tasks)
 
@@ -98,6 +97,16 @@ def delete_task():
     models.remove_task(task_id)
     return redirect(url_for('home'))
 
+
+
+@app.route('/edit_task/<int:task_id>',methods=['GET','POST'])
+def edit_task(task_id):
+    if request.method == 'GET':
+        return render_template('edit_task.html')
+    else: return 'Post %d' % task_id
+
+
+    
 
 if __name__ == '__main__':
     app.run(port=7000, debug=True)

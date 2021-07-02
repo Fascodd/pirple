@@ -26,21 +26,17 @@ get_user_tasks().then((data) => {
   g_user_task_data = user_task_data;
 });
 
-function create_task(obj) {
-  const task_list_container = document.getElementById("user_task_container");
-  const task_container = document.createElement("div");
-  task_container.classList = "task-list-container";
-  const task_div_container = document.createElement("div");
-  const delete_div = createDeleteBtn();
-  let obj_iterator = 0;
-  for (item_data in obj) {
-    createListItem(obj[item_data], task_container, obj_iterator, item_data);
-    obj_iterator++;
+function create_task(task_obj) {
+  const task_table = document.getElementById("task-list")
+  const task_row = document.createElement("tr")
+  for (task_data in task_obj) {
+    createListItem(task_row, task_obj[task_data])
   }
+  const edit_link = createEditLink(task_obj['id'])
+  task_row.appendChild(edit_link)
 
-  task_container.appendChild(task_div_container);
-  task_container.appendChild(delete_div);
-  task_list_container.appendChild(task_container);
+
+  task_table.appendChild(task_row)
 }
 
 function createDeleteBtn() {
@@ -54,18 +50,20 @@ function createDeleteBtn() {
   return delete_div;
 }
 
-function createListItem(e, parentContainer, index, item_data) {
-  const element_div = document.createElement("div");
-  const element_p = document.createElement("p");
-  element_p.textContent = e;
-  element_div.appendChild(element_p);
-  element_div.classList = `task-item task-width ${item_data}`;
-  element_p.classList = "task-text";
-  parentContainer.appendChild(element_div);
-  index === 0
-    ? (element_p.classList += " task-id")
-    : element_p.addEventListener("focusin", (e) => {
-        console.log(e);
-        console.log("i am focused");
-      });
+function createListItem(task_row, task_data) {
+  const task_td = document.createElement("td");
+  task_td.textContent = task_data
+  task_row.appendChild(task_td)
 }
+
+function createEditLink(task_id) {
+  const task_td = document.createElement("td")
+  const edit_link = document.createElement("a")
+  edit_link.href = `http://localhost:7000/edit_task/${task_id}`
+  edit_link.innerHTML = "Edit"
+  task_td.appendChild(edit_link)
+  return task_td
+
+}
+
+
