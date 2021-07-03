@@ -98,12 +98,20 @@ def delete_task():
     return redirect(url_for('home'))
 
 
-
-@app.route('/edit_task/<int:task_id>',methods=['GET','POST'])
+@app.route('/edit_task/<int:task_id>', methods=['GET', 'POST'])
 def edit_task(task_id):
     if request.method == 'GET':
+
         return render_template('edit_task.html')
-    else: return 'Post %d' % task_id
+    else:
+        return 'Post %d' % task_id
+
+
+@app.route('/edit_task/<int:task_id>/edit')
+def edit(task_id):
+    task_info = models.get_task(session['username'], task_id)
+    return jsonify(task_info)
+
 
 if __name__ == '__main__':
     app.run(port=7000, debug=True)
