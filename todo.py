@@ -101,10 +101,13 @@ def delete_task():
 @app.route('/edit_task/<int:task_id>', methods=['GET', 'POST'])
 def edit_task(task_id):
     if request.method == 'GET':
-
         return render_template('edit_task.html')
     else:
-        return 'Post %d' % task_id
+        task_name = request.form['task_name']
+        task_start = request.form['task_start']
+        task_due = request.form['task_due']
+        models.update_task(task_id, task_name, task_start, task_due)
+        return render_template('edit_task.html', message="Update successful")
 
 
 @app.route('/edit_task/<int:task_id>/edit')

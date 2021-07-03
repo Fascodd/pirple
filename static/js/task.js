@@ -3,6 +3,7 @@ async function get_task() {
         let href = window.location.href;
         let response = await fetch(`${href}/edit`);
         let data = await response.json();
+
         return data;
     } catch (err) {
         console.log(err);
