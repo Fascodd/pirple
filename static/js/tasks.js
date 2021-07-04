@@ -26,18 +26,20 @@ get_user_tasks().then((data) => {
   g_user_task_data = user_task_data;
 });
 
-function create_task(obj) {
-  const task_table = document.getElementById("task-table");
-  const task_row = document.createElement("tr");
-  task_row.classList = "task-row";
-  for (item_data in obj) {
-    createListItem(obj, task_row);
+function create_task(task_obj) {
+  const task_table = document.getElementById("task-list")
+  const task_row = document.createElement("tr")
+  for (task_data in task_obj) {
+    createListItem(task_row, task_obj[task_data])
   }
-  task_table.appendChild(task_row);
+  const edit_link = createEditLink(task_obj['id'])
+  task_row.appendChild(edit_link)
+
+
+  task_table.appendChild(task_row)
 }
 
 function createDeleteBtn() {
-  /*
   const delete_div = document.createElement("div");
   const delete_button = document.createElement("a");
   delete_button.classList = "delete_btn";
@@ -45,12 +47,23 @@ function createDeleteBtn() {
   delete_button.innerText = "X";
   delete_div.appendChild(delete_button);
 
-  return delete_div; */
+  return delete_div;
 }
 
-function createListItem(obj, task_row) {
-  const data = obj[item_data];
-  const table_detail = document.createElement("td");
-  table_detail.textContent = data;
-  task_row.appendChild(table_detail);
+function createListItem(task_row, task_data) {
+  const task_td = document.createElement("td");
+  task_td.textContent = task_data
+  task_row.appendChild(task_td)
 }
+
+function createEditLink(task_id) {
+  const task_td = document.createElement("td")
+  const edit_link = document.createElement("a")
+  edit_link.href = `http://localhost:7000/edit_task/${task_id}`
+  edit_link.innerHTML = "Edit"
+  task_td.appendChild(edit_link)
+  return task_td
+
+}
+
+

@@ -1,0 +1,19 @@
+{% extends "structure.html" %}{%block main %}
+<h1>Update task page</h1>
+
+<form action="" method="POST">
+  {{message}}
+  <div class="form-field">
+    <label for="">Task Name</label><input type="text" name="task_name" />
+  </div>
+  <div class="form-field">
+    <label for="">Task Start</label><input type="text" name="task_start" />
+  </div>
+  <div class="form-field">
+    <label for="">Task Due</label><input type="text" name="task_due" />
+  </div>
+  <button type="submit">Update Task</button>
+</form>
+<script src="../static/js/task.js"></script>
+
+{% endblock main %}

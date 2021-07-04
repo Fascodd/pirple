@@ -113,3 +113,17 @@ def add_task(username, task_name, task_startdate, task_duedate):
     db_cursor.close()
     db_connection.close()
     return
+
+
+def get_task(username, task_id):
+    db_user_id = get_user_id(username)
+    db_connection = sqlite3.connect('tasks.db', check_same_thread=False)
+    db_cursor = db_connection.cursor()
+    db_cursor.execute("""
+    SELECT * FROM tasks WHERE taskid = '{task_id}' AND userid = '{db_user_id}'
+    ;""".format(db_user_id=db_user_id, task_id=task_id))
+    db_cursor_task = db_cursor.fetchall()
+    db_connection.commit()
+    db_cursor.close()
+    db_connection.close()
+    return db_cursor_task

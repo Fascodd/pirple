@@ -70,7 +70,6 @@ def logout():
 @app.route('/tasks', methods=['GET', 'POST'])
 def tasks():
     if request.method == 'GET':
-        print('ping')
         user_tasks = models.get_tasks(session['username'])
         return jsonify(user_tasks)
 
@@ -97,6 +96,24 @@ def delete_task():
     task_id = request.json
     models.remove_task(task_id)
     return redirect(url_for('home'))
+
+
+@app.route('/edit_task/<int:task_id>', methods=['GET', 'POST'])
+def edit_task(task_id):
+    if request.method == 'GET':
+        return render_template('edit_task.html')
+    else:
+        task_name = request.form['task_name']
+        task_start = request.form['task_start']
+        task_due = request.form['task_due']
+        models.update_task(task_id, task_name, task_start, task_due)
+        return render_template('edit_task.html', message="Update successful")
+
+
+@app.route('/edit_task/<int:task_id>/edit')
+def edit(task_id):
+    task_info = models.get_task(session['username'], task_id)
+    return jsonify(task_info)
 
 
 if __name__ == '__main__':

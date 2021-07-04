@@ -20,23 +20,17 @@
     <button type="submit">Add Task</button>
   </form>
 </div>
-  <p>Tasks</p>
-  <form action="">
-    <table id="task-table" onload="get_user_tasks()">
-      <tr>
-        <th>Task id</th>
-        <th>Task Name</th>
-        <th>Task Start Date</th>
-        <th>Task Due Date</th>
-      </tr>
-    <tr>
-      <td>Dummy id</td>
-      <td>Dummy Task Name</td>
-      <td>Dummy Start Date</td>
-      <td>Dummy Due Date</td>
-    </tr>
-  </form>
-  <a href="/logout">Logout</a>
-  <script src="../static/js/tasks.js"></script>
-  {% endblock main %}
+<table id="task-list">
+  <tr class="task-width">
+    <th>Task Id</th>
+    <th>Task Name</th>
+    <th>Task Start Date</th>
+    <th>Task Due Data</th>
+    <th>Edit</th>
+  </tr>
+</table>
 
+<a href="/logout">Logout</a>
+<script src="../static/js/tasks.js"></script>
+
+{% endblock main %}
