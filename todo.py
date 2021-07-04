@@ -13,6 +13,15 @@ def home():
     return render_template('index.html', message="this is the homepage")
 
 
+@app.route('/admin', methods=['GET'])
+def admin():
+    if 'admin' in session:
+        g.admin = session['admin']
+        message = f'Welcome admin : {g.admin}'
+        return render_template('admin_control.html', message=message)
+    return render_template('admin_login.html')
+
+
 @app.route('/about', methods=['GET'])
 def about():
     return render_template('about_us.html')
@@ -53,12 +62,32 @@ def login():
     return render_template('login.html', message=db_pwd)
 
 
+@app.route('/admin_login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'GET':
+        return redirect(url_for('admin'))
+    else:
+        session.pop('admin', None)
+        form_username = request.form['username']
+        db_pwd = models.verify_admin_pw(form_username)
+        if db_pwd == request.form['password']:
+            session['admin'] = request.form['username']
+            return redirect(url_for('admin'))
+    return render_template('admin_login.html', message=db_pwd)
+
+
 @app.route('/user_page', methods=['GET', 'POST'])
 def user_page():
     if request.method == 'GET':
         if 'username' in session:
             return redirect(url_for('home'))
         return render_template('index.html')
+
+
+@app.route('/admin_logout')
+def admin_logout():
+    session.pop('admin', None)
+    return redirect(url_for('admin'))
 
 
 @app.route('/logout')

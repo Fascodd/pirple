@@ -27,16 +27,15 @@ get_user_tasks().then((data) => {
 });
 
 function create_task(task_obj) {
-  const task_table = document.getElementById("task-list")
-  const task_row = document.createElement("tr")
+  const task_table = document.getElementById("task-list");
+  const task_row = document.createElement("tr");
   for (task_data in task_obj) {
-    createListItem(task_row, task_obj[task_data])
+    createListItem(task_row, task_obj[task_data]);
   }
-  const edit_link = createEditLink(task_obj['id'])
-  task_row.appendChild(edit_link)
+  const edit_link = createEditLink(task_obj["id"]);
+  task_row.appendChild(edit_link);
 
-
-  task_table.appendChild(task_row)
+  task_table.appendChild(task_row);
 }
 
 function createDeleteBtn() {
@@ -52,18 +51,15 @@ function createDeleteBtn() {
 
 function createListItem(task_row, task_data) {
   const task_td = document.createElement("td");
-  task_td.textContent = task_data
-  task_row.appendChild(task_td)
+  task_td.textContent = task_data;
+  task_row.appendChild(task_td);
 }
 
 function createEditLink(task_id) {
-  const task_td = document.createElement("td")
-  const edit_link = document.createElement("a")
-  edit_link.href = `http://localhost:7000/edit_task/${task_id}`
-  edit_link.innerHTML = "Edit"
-  task_td.appendChild(edit_link)
-  return task_td
-
+  const task_td = document.createElement("td");
+  const edit_link = document.createElement("a");
+  edit_link.href = `http://localhost:7000/edit_task/${task_id}`;
+  edit_link.innerHTML = "Edit";
+  task_td.appendChild(edit_link);
+  return task_td;
 }
-
-

@@ -39,6 +39,36 @@ def verify_pw(username):
         return'Username/Password is not correctly entered'
 
 
+def verify_admin_pw(username):
+    db_connection = sqlite3.connect('tasks.db', check_same_thread=False)
+    db_cursor = db_connection.cursor()
+    if admin_exists(username):
+        db_cursor.execute(
+            """ SELECT password FROM admins WHERE username = '{username}';""".format(username=username))
+        db_password = db_cursor.fetchone()[0]
+        db_connection.commit()
+        db_cursor.close()
+        db_connection.close()
+        return db_password
+    else:
+        return'Username/Password is not correctly entered'
+
+
+def admin_exists(username):
+    db_connection = sqlite3.connect('tasks.db', check_same_thread=False)
+    db_cursor = db_connection.cursor()
+    db_cursor.execute(
+        """ SELECT * FROM admins WHERE username = '{username}';""".format(username=username))
+    db_user = db_cursor.fetchone()
+    db_connection.commit()
+    db_cursor.close()
+    db_connection.close()
+    if db_user is None:
+        return False
+    else:
+        return True
+
+
 def user_exists(username):
     db_connection = sqlite3.connect('tasks.db', check_same_thread=False)
     db_cursor = db_connection.cursor()

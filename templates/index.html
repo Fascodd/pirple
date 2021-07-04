@@ -1,6 +1,12 @@
 {% extends "structure.html" %}{% block main %}
-<h1>This is the "index.html" page</h1>
-<h3>We have the greatest todo list application</h3>
-<a href="/signup"> Sign up</a>
-<a href="/login"> Log in</a>
+<div class="card text-center">
+  <div class="card-header">This is the "index.html" page</div>
+  <div class="card-body">
+    <h5 class="card-title">To Do Web Application</h5>
+    <p class="card-text">We have the greatest todo list application</p>
+    <a class="btn btn-primary" href="/signup" role="button"> Sign up</a>
+    <a class="btn btn-primary" href="/login" role="button"> Log in</a>
+  </div>
+  <div class="card-footer text-muted">Built .02 days ago</div>
+</div>
 {% endblock main %}

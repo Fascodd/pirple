@@ -1,26 +1,28 @@
 {% extends 'structure.html' %}{% block main %}
-<h1>Welcome to your homepage</h1>
+<h1>Homepage</h1>
+
 <h3>{{message}}</h3>
 <div>
-  <p>Add a task</p>
   <form action="/add_task" method="POST">
-    <div class="add-task-header">
-      <label for="">Task Name</label>
-      <input type="text" name="task_name" />
+    <div class="row">
+      <div class="add-task-header form-group col">
+        <label for="">Task Name</label>
+        <input class="form-control" type="text" name="task_name" />
+      </div>
+      <div class="add-task-header form-group col">
+        <label for="">Start Date</label>
+        <input class="form-control" type="text" name="task_start_date" />
+      </div>
+      <div class="add-task-header form-group col">
+        <label for=""> Due Date</label>
+        <input class="form-control" type="text" name="task_due_date" />
+      </div>
     </div>
-    <div class="add-task-header">
-      <label for="">Start Date</label>
-      <input type="text" name="task_start_date" />
-    </div>
-    <div class="add-task-header">
-      <label for=""> Due Date</label>
-      <input type="text" name="task_due_date" />
-    </div>
-
-    <button type="submit">Add Task</button>
+    <button type="submit" class="btn btn-primary form-group">Add Task</button>
   </form>
 </div>
-<table id="task-list">
+
+<table id="task-list" class="table">
   <tr class="task-width">
     <th>Task Id</th>
     <th>Task Name</th>
@@ -29,8 +31,7 @@
     <th>Edit</th>
   </tr>
 </table>
-
-<a href="/logout">Logout</a>
+<a class="btn btn-secondary" href="/logout" role="button"> Logout</a>
 <script src="../static/js/tasks.js"></script>
 
 {% endblock main %}
