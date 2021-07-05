@@ -1,17 +1,14 @@
 import sqlite3
-connection = sqlite3.connect('tasks.db', check_same_thread=False)
+db_connection = sqlite3.connect('tasks.db', check_same_thread=False)
+db_cursor = db_connection.cursor()
+db_cursor.execute(
 
-cursor = connection.cursor()
-
-cursor.execute(
-    """ CREATE TABLE admins(
-        adminid INTEGER PRIMARY KEY AUTOINCREMENT,
-        username VARCHAR(16),
-        password VARCHAR(32),
-        userid INTEGER NOT NULL,
-        FOREIGN KEY(userid) REFERENCES users(pk)
-    );"""
+    """ SELECT taskid 
+    FROM tasks 
+    WHERE "data" >= date('now', '-1 days') AND  datetime(1092941466, 'unixepoch', 'localtime');"""
 )
-connection.commit()
-cursor.close()
-connection.close()
+tasks = db_cursor.fetchall()
+db_connection.commit()
+db_cursor.close()
+db_connection.close()
+print(len(tasks))

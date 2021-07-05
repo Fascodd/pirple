@@ -18,7 +18,8 @@ cursor.execute(
         taskstartdate INTEGER NOT NULL,
         taskduedate INTEGER DEFAULT "0" NOT NULL,
         userid INTEGER NOT NULL,
-        FOREIGN KEY(userid) REFERENCES users(pk)
+        FOREIGN KEY(userid) REFERENCES users(pk),
+        data TEXT NOT NULL
     );"""
 )
 
@@ -29,7 +30,8 @@ cursor.execute(
         username VARCHAR(16),
         password VARCHAR(32),
         userid INTEGER NOT NULL,
-        FOREIGN KEY(userid) REFERENCES users(pk)
+        FOREIGN KEY(userid) REFERENCES users(pk),
+        date TEXT NOT NULL
     );"""
 )
 connection.commit()

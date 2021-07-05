@@ -1,5 +1,33 @@
 {% extends "structure.html" %} {% block main %}
 <h1>This is the admin control page</h1>
 {{message}}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
+  integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
+  integrity="sha512-5fsy+3xG8N/1PV5MIJz9ZsWpkltijBI48gBzQ/Z2eVATePGHOkMIn+xTDHIfTZFVb9GMpflF2wOWItqxAP2oLQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+<table id="metric-list" class="u-full-width">
+  <thead>
+    <tr class="task-width">
+      <th>Total Tasks Last 24 hrs</th>
+      <th>Total Tasks</th>
+      <th>Total Users</th>
+      <th>Total Users Last 24 hrs</th>
+    </tr>
+  </thead>
+  <tbody id="admin-table-body"></tbody>
+</table>
+
 <a class="btn btn-secondary" href="/admin_logout" role="button"> Logout</a>
+<script src="../static/js/admin.js"></script>
 {% endblock main %}

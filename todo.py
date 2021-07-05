@@ -145,5 +145,15 @@ def edit(task_id):
     return jsonify(task_info)
 
 
+@app.route('/admin_stats', methods=['GET'])
+def admin_stats():
+    total_users = models.number_of_users()
+    total_lists = models.number_of_lists()
+    users_reg_l24 = models.registered_users_24hrs()
+    lists_reg_l24 = models.registered_tasks_24hrs()
+    return jsonify(total_users=total_users, total_lists=total_lists,
+                   users_reg_l24=users_reg_l24, lists_reg_l24=lists_reg_l24)
+
+
 if __name__ == '__main__':
     app.run(port=7000, debug=True)

@@ -157,3 +157,63 @@ def get_task(username, task_id):
     db_cursor.close()
     db_connection.close()
     return db_cursor_task
+
+
+def number_of_users():
+    db_connection = sqlite3.connect('tasks.db', check_same_thread=False)
+    db_cursor = db_connection.cursor()
+    db_cursor.execute(
+
+        """ SELECT COUNT (*) FROM users;"""
+    )
+    db_users = db_cursor.fetchone()[0]
+    db_connection.commit()
+    db_cursor.close()
+    db_connection.close()
+    return db_users
+
+
+def number_of_lists():
+    db_connection = sqlite3.connect('tasks.db', check_same_thread=False)
+    db_cursor = db_connection.cursor()
+    db_cursor.execute(
+
+        """ SELECT COUNT (*) FROM tasks;"""
+    )
+    db_lists = db_cursor.fetchone()[0]
+    db_connection.commit()
+    db_cursor.close()
+    db_connection.close()
+    return db_lists
+
+
+def registered_users_24hrs():
+    db_connection = sqlite3.connect('tasks.db', check_same_thread=False)
+    db_cursor = db_connection.cursor()
+    db_cursor.execute(
+
+        """ SELECT username 
+    FROM users 
+    WHERE "date" >= date('now', '-1 days') AND  datetime(1092941466, 'unixepoch', 'localtime');"""
+    )
+    users = db_cursor.fetchall()
+    db_connection.commit()
+    db_cursor.close()
+    db_connection.close()
+    return len(users)
+
+
+def registered_tasks_24hrs():
+    db_connection = sqlite3.connect('tasks.db', check_same_thread=False)
+    db_cursor = db_connection.cursor()
+    db_cursor.execute(
+
+        """ SELECT taskid 
+    FROM tasks 
+    WHERE "data" >= date('now', '-1 days') AND  datetime(1092941466, 'unixepoch', 'localtime');"""
+    )
+    tasks = db_cursor.fetchall()
+    db_connection.commit()
+    db_cursor.close()
+    db_connection.close()
+    return len(tasks)
